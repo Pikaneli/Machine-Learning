@@ -108,56 +108,6 @@ y = dataset_skaliran['Fire Alarm']
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, stratify=y)
 
-# Pravljenje modela bez GridSearch-a sa unakrsnom validacijom
-'''models = [KNeighborsClassifier(), LogisticRegression(), DecisionTreeClassifier()]
-ime = []
-tacnost = []
-confusion_matrica = []
-preciznost = []
-odziv = []
-f1 = []
-vreme = []
-
-for model in models:
-	ime.append(model)
-	pocetak = time.time()
-	model.fit(X_train, y_train)
-	y_predict = model.predict(X_test)
-	kraj = time.time()
-
-	# unakrsna validacija
-	kfold = KFold(n_splits=5)
-	scores = cross_val_score(model, X_test, y_predict, cv=kfold)
-
-	Tacnost = accuracy_score(y_test, y_predict) * 100
-	tacnost.append(round(Tacnost, 2))
-	Preciznost = precision_score(y_test, y_predict)*100
-	preciznost.append(round(Preciznost, 2))
-	Odziv = recall_score(y_test, y_predict)*100
-	odziv.append(round(Odziv, 2))
-	Confusion_matrica = confusion_matrix(y_test, y_predict)
-	confusion_matrica.append(Confusion_matrica)
-	F1 = f1_score(y_test, y_predict)*100
-	f1.append(round(F1, 2))
-	Vreme = round((kraj-pocetak), 2)
-	vreme.append(Vreme)
-
-	print("Rezultati unakrsne validacije za",model, ":")
-	print(scores)
-	print("Srednja tačnost: %0.2f" % scores.mean())
-	print("-----------------------------------")
-
-# prikaz rezultata preko datafrejma
-recnik={
-	'Ime': ime, 'Tacnost': tacnost, 'Preciznost': preciznost,
-	'Odziv': odziv, 'F1': f1, 'Matrica': confusion_matrica,
-	'Vreme': vreme
-}
-
-model_df = pd.DataFrame(recnik)
-print(model_df)   
-'''
-
 # KNN sa hiperparametrima
 knn = KNeighborsClassifier()
 
